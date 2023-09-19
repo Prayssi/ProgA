@@ -1,8 +1,8 @@
 cmake_minimum_required( VERSION 3.7.0 )
-project( toto LANGUAGES C )
+project( main LANGUAGES C )
 
 file(GLOB SOURCES
-    "toto.c"
+    "src/main.c"
 )
 
 find_package( SDL2 )
