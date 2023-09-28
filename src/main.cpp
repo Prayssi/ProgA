@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 
-#include "sprite.cpp"
+#include "sprite.h"
 
 
 int main()
@@ -14,7 +14,7 @@ int main()
 	SDL_CreateWindowAndRenderer(1080,720,SDL_WINDOW_SHOWN,&window,&renderer); 
 	SDL_SetWindowTitle(window,"jRPG demo");
 
-	Sprite test(renderer,"../res/test.bmp",48,32);
+	Sprite test(renderer,"../res/test.bmp",301,287);
 
 	SDL_Event event;
 
@@ -29,9 +29,10 @@ int main()
 				gameRunning=false;
 			}
 
-			SDL_Rect dst = {0,0,48,32};
-			SDL_Rect src = test.getRect();
-			SDL_RenderCopy(renderer,test.getTexture(),&src,&dst);
+			SDL_Rect dst = {0,0,301,287};
+			//SDL_Rect src = test.getRect();
+    		//SDL_RenderCopy(renderer,test.getTexture(),&src,&dst);
+    		test.displayText(renderer,dst);
 			SDL_RenderPresent(renderer);
 		}
 	}
