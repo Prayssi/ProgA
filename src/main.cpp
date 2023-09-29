@@ -4,6 +4,8 @@
 #include <stdbool.h>
 
 #include "sprite.h"
+#include "monster.h"
+#include "vector2.h"
 
 
 int main()
@@ -14,8 +16,8 @@ int main()
 	SDL_CreateWindowAndRenderer(1080,720,SDL_WINDOW_SHOWN,&window,&renderer); 
 	SDL_SetWindowTitle(window,"jRPG demo");
 
-	Sprite test(renderer,"../res/test.bmp",301,287);
-
+	//Sprite test(renderer,"../res/test.bmp",301,287);
+	Monster m1(10,10,renderer,"../res/test.bmp",301,287);
 	SDL_Event event;
 
 	bool gameRunning = true;
@@ -29,10 +31,10 @@ int main()
 				gameRunning=false;
 			}
 
-			SDL_Rect dst = {0,0,301,287};
+			SDL_Rect dst = m1.sprite.getRectPos(m1.pos.getx(),m1.pos.gety());
 			//SDL_Rect src = test.getRect();
     		//SDL_RenderCopy(renderer,test.getTexture(),&src,&dst);
-    		test.displayText(renderer,dst);
+    		m1.sprite.displayText(renderer,dst);
 			SDL_RenderPresent(renderer);
 		}
 	}
