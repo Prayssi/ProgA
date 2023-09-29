@@ -2,17 +2,7 @@
 #include <stdio.h>
 
 #include "sprite.h"
-/*class Sprite{
-public:
-	Sprite(SDL_Renderer* renderer, const char *pathfile, int w, int l);
-    SDL_Rect getRect();
-    SDL_Texture* getTexture();
 
-private:
-	SDL_Texture* texture = NULL;
-	int width;
-	int length; 
-};*/
 
 Sprite::Sprite(SDL_Renderer* renderer, const char *pathfile, int w, int l): width(w), length(l)//constructeur
 {
@@ -26,9 +16,33 @@ Sprite::Sprite(SDL_Renderer* renderer, const char *pathfile, int w, int l): widt
     SDL_FreeSurface(surface);
 }
 
+Sprite::Sprite()
+{
+    texture = NULL;
+    width = 0; length =0;
+}
+
+void Sprite::setSprite(SDL_Renderer* renderer, const char *pathfile, int w, int l)
+{
+    width = w; length = l;
+    SDL_Surface *surface = SDL_LoadBMP(pathfile);
+    if(!surface)
+    {
+        printf("SDL_LoadBMP failed");
+    }
+    
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+}
+
+
 SDL_Rect Sprite::getRect()//Renvoi la taille du Sprite
 {
     return {0,0,width,length};
+}
+SDL_Rect Sprite::getRectPos(int x,int y)//Renvoi un SDL_Rect de la destination du sprite
+{
+    return{x,y,width,length};
 }
 
 SDL_Texture* Sprite::getTexture()//Renvoi la texture du Sprite
