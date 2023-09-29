@@ -4,7 +4,7 @@ project( main )
 
 set(SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 file(GLOB SOURCES
-    "${SRC_DIR}/*.hpp"
+    "${SRC_DIR}/*.h"
     "${SRC_DIR}/*.cpp"
 )
 add_definitions(-DRESOURCES_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/res/\")
