@@ -78,6 +78,11 @@ struct Vector2
 		x = newX;
 		y = newY;
 	}
+	void Set(Vector2 v)//Set x and y component of an existing Vector2
+	{
+		x = v.getx();
+		y = v.gety();
+	}
 
 	void Normalized()//return this vector normalized
 	{
@@ -89,6 +94,21 @@ struct Vector2
 	{
 		if(vec.getx()!=x || vec.gety()!=y)return false;
 		else return true;
+	}
+
+	Vector2 plus(Vector2 v1, Vector2 v2)
+	{
+		double xres = v1.getx() + v2.getx();
+		double yres = v1.gety() + v2.gety();
+		Vector2 res(xres,yres);
+		return res;
+	}
+	Vector2 minus(Vector2 v1, Vector2 v2)
+	{
+		double xres = v1.getx() - v2.getx();
+		double yres = v1.gety() - v2.gety();
+		Vector2 res(xres,yres);
+		return res;
 	}
 
 
