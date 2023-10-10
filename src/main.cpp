@@ -1,41 +1,62 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <stdbool.h>
+#include <chrono>
+#include <thread>
 
 #include "sprite.h"
-#include "monster.h"
+#include "bille.h"
 #include "vector2.h"
 
 
 int main()
 {
+	const int FPS = 30;
+
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;
 
-	SDL_CreateWindowAndRenderer(1080,720,SDL_WINDOW_SHOWN,&window,&renderer); 
+	SDL_CreateWindowAndRenderer(720,1080,SDL_WINDOW_SHOWN,&window,&renderer); 
 	SDL_SetWindowTitle(window,"jRPG demo");
 
-	//Sprite test(renderer,"../res/test.bmp",301,287);
-	Monster m1(10,10,renderer,"../res/test.bmp",301,287);
-	SDL_Event event;
+	
 
+	Bille bille(360,200,renderer);
+	SDL_Event event;
+	
 	bool gameRunning = true;
+
+	const int frameDelay = 1000/FPS;
+	Uint32 frameStart;
+	int frameTime;
 
 	while(gameRunning)
 	{
+		frameStart = SDL_GetTicks();
+
 		while(SDL_PollEvent(&event))
 		{
+			SDL_SetRenderDrawColor(renderer,255,255,255,255);
 			if(event.type == SDL_QUIT)
 			{
 				gameRunning=false;
 			}
 
-			SDL_Rect dst = m1.sprite.getRectPos(m1.pos.getx(),m1.pos.gety());
-			//SDL_Rect src = test.getRect();
-    		//SDL_RenderCopy(renderer,test.getTexture(),&src,&dst);
-    		m1.sprite.displayText(renderer,dst);
-			SDL_RenderPresent(renderer);
+
+
+
+			SDL_Rect dst = bille.sprite.getRectPos(bille.pos.getx(),bille.pos.gety());
+			SDL_RenderClear(renderer);
+			bille.Update();
+    		bille.sprite.displayText(renderer,dst);
+    		SDL_RenderPresent(renderer);
+
+    		//Régule le nombre de FPS
+    		frameTime = SDL_GetTicks() - frameStart;
+    		if(frameDelay > frameTime) SDL_Delay(frameDelay-frameTime);
+
 		}
 	}
 
