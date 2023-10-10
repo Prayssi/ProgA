@@ -13,6 +13,7 @@ class Sprite{
 public:
 	Sprite(SDL_Renderer* renderer, const char *pathfile, int w, int l);
 	Sprite();
+	~Sprite();//Destructeur
 	void setSprite(SDL_Renderer* renderer, const char *pathfile, int w, int l);
     SDL_Rect getRect();
     SDL_Rect getRectPos(int x, int y);

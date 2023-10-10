@@ -22,6 +22,11 @@ Sprite::Sprite()
     width = 0; length =0;
 }
 
+Sprite::~Sprite()
+{
+    //Destruction
+}
+
 void Sprite::setSprite(SDL_Renderer* renderer, const char *pathfile, int w, int l)
 {
     width = w; length = l;
