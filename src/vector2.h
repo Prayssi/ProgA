@@ -110,6 +110,12 @@ struct Vector2
 		Vector2 res(xres,yres);
 		return res;
 	}
+	void time(double facteur)
+	{
+		double xres = this->getx() * facteur;
+		double yres = this->gety() * facteur;
+		this->Set(xres,yres);
+	}
 
 
 };

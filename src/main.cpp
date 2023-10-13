@@ -3,12 +3,14 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <stdbool.h>
-#include <chrono>
-#include <thread>
 
 #include "sprite.h"
 #include "bille.h"
 #include "vector2.h"
+
+#define HEIGHT_SCREEN 1080
+#define LENGTH_SCREEN 720
+
 
 
 int main()
@@ -18,7 +20,7 @@ int main()
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;
 
-	SDL_CreateWindowAndRenderer(720,1080,SDL_WINDOW_SHOWN,&window,&renderer); 
+	SDL_CreateWindowAndRenderer(LENGTH_SCREEN,HEIGHT_SCREEN,SDL_WINDOW_SHOWN,&window,&renderer); 
 	SDL_SetWindowTitle(window,"jRPG demo");
 
 	
@@ -28,37 +30,51 @@ int main()
 	
 	bool gameRunning = true;
 
-	const int frameDelay = 1000/FPS;
-	Uint32 frameStart;
-	int frameTime;
-
 	while(gameRunning)
 	{
-		frameStart = SDL_GetTicks();
-
+		
 		while(SDL_PollEvent(&event))
 		{
-			SDL_SetRenderDrawColor(renderer,255,255,255,255);
 			if(event.type == SDL_QUIT)
 			{
 				gameRunning=false;
 			}
 
 
-
-
-			SDL_Rect dst = bille.sprite.getRectPos(bille.pos.getx(),bille.pos.gety());
-			SDL_RenderClear(renderer);
-			bille.Update();
-    		bille.sprite.displayText(renderer,dst);
-    		SDL_RenderPresent(renderer);
-
-    		//Régule le nombre de FPS
-    		frameTime = SDL_GetTicks() - frameStart;
-    		if(frameDelay > frameTime) SDL_Delay(frameDelay-frameTime);
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+                if (event.button.button == SDL_BUTTON_LEFT) {
+                    // Si le bouton gauche de la souris est enfoncé, effectuez une action
+                    bille.SetVitesse(-1);
+                    printf("%f %f",bille.vit.getx(),bille.vit.gety());
+                    fflush(stdout);
+                }
+            }
 
 		}
+			
+			bille.Update();
+			SDL_Rect dst = bille.sprite.getRectPos(bille.pos.getx(),bille.pos.gety());
+
+			//On efface tout...
+			SDL_SetRenderDrawColor(renderer,255,255,255,255);
+			SDL_RenderClear(renderer);
+			
+
+			//...avant de tout réafficher
+    		bille.sprite.displayText(renderer,dst);
+
+    		//Et on actualise
+    		SDL_RenderPresent(renderer);
+
+    		//On impose une latence pour éviter d'être à 200000 FPS wtf
+			SDL_Delay(16);//16ms environ 60 FPS    		
+
+		
 	}
+
+	SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 
 }
 
