@@ -7,8 +7,9 @@
 #include "sprite.h"
 #include "bille.h"
 #include "vector2.h"
+#include "platform.h"
 
-#define HEIGHT_SCREEN 1080
+#define HEIGHT_SCREEN 500
 #define LENGTH_SCREEN 720
 
 
@@ -26,6 +27,7 @@ int main()
 	
 
 	Bille bille(360,200,renderer);
+	Platform plateforme(400,LENGTH_SCREEN/2, renderer);
 	SDL_Event event;
 	
 	bool gameRunning = true;
@@ -53,7 +55,7 @@ int main()
 		}
 			
 			bille.Update();
-			SDL_Rect dst = bille.sprite.getRectPos(bille.pos.getx(),bille.pos.gety());
+			plateforme.Update();
 
 			//On efface tout...
 			SDL_SetRenderDrawColor(renderer,255,255,255,255);
@@ -61,7 +63,11 @@ int main()
 			
 
 			//...avant de tout réafficher
-    		bille.sprite.displayText(renderer,dst);
+			SDL_Rect dstBille = bille.sprite.getRectPos(bille.pos.getx(),bille.pos.gety());
+			SDL_Rect dstPlateforme = plateforme.sprite.getRectPos(plateforme.pos.getx(),plateforme.pos.gety());
+
+    		bille.sprite.displayText(renderer,dstBille);
+    		plateforme.sprite.displayText(renderer,dstPlateforme);
 
     		//Et on actualise
     		SDL_RenderPresent(renderer);
