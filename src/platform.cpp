@@ -12,7 +12,7 @@ Platform::Platform(double xpos, double ypos,SDL_Renderer* renderer)
 {
 	pos.Set(xpos,ypos);
 	this->SetVitesse(0,0);
-	sprite.setSprite(renderer,"../res/platform.png",hauteur_platform,largeur_platform,1);
+	sprite.setSprite(renderer,"../res/platform.png",this->largeur,this->hauteur,1);
 }
 
 Platform::~Platform()
@@ -27,7 +27,8 @@ void Platform::Update()
 
 }
 
-void Platform::handle_keyboard() {
+void Platform::handle_keyboard() 
+{
         const Uint8 *kbstate = SDL_GetKeyboardState(NULL);
         if (!kbstate[SDL_SCANCODE_RIGHT] && !kbstate[SDL_SCANCODE_LEFT])
             this->SetVitesse(0,0);
@@ -40,7 +41,7 @@ void Platform::handle_keyboard() {
             {
                 this->SetVitesse(3,0);
             }
-    }
+}
 
 void Platform::SetVitesse(double vitX,double vitY)
 {

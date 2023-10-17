@@ -19,6 +19,8 @@ public:
 	void SetVitesse(double mult);//On modifie la vitesse et la direction en multipliant les deux composants par un facteur
 	void handle_keyboard();
 
+	const double largeur = 151;
+	const double hauteur = 16;
 	Sprite sprite;
 	Vector2 pos;
 	Vector2 vit;
