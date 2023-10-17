@@ -5,6 +5,7 @@
 #include "bille.h"
 #include "sprite.h"
 #include "vector2.h"
+#include "platform.h"
 
 #define hauteur_bille 17
 #define largeur_bille 17
@@ -16,11 +17,13 @@
 
 
 
-Bille::Bille(double xpos, double ypos,SDL_Renderer* renderer)
+Bille::Bille(double xpos, double ypos,SDL_Renderer* renderer, Platform* plateforme): plateforme(plateforme)
 {
+
 	pos.Set(xpos,ypos);
 	this->SetVitesse(4,3);
 	sprite.setSprite(renderer,"../res/bille.bmp",hauteur_bille,largeur_bille,0);
+
 }
 
 Bille::~Bille()
@@ -33,6 +36,7 @@ void Bille::Update()
 
 	pos.Set(pos.plus(pos,vit));
 	CollisionBord();
+	CollisionPlateforme();
 
 }
 
@@ -61,6 +65,22 @@ void Bille::CollisionBord()
 	}
 
 }
+
+void Bille::CollisionPlateforme()
+{
+	int circleradius = hauteur_bille/2;
+
+	double dx = std::max(std::min(pos.getx()+ circleradius, this->plateforme->pos.getx() + this->plateforme->largeur), this->plateforme->pos.getx()) - pos.getx()+ circleradius;
+    double dy = std::max(std::min(pos.gety()+ circleradius, this->plateforme->pos.getx() + this->plateforme->pos.gety()), this->plateforme->pos.gety()) - pos.gety()+ circleradius;
+    double distance = dx * dx + dy * dy;
+
+    if(distance <= circleradius*circleradius)
+    {
+  
+    	this->SetVitesse(vit.getx(),vit.gety()* -1);
+    }
+}
+
 
 //ReinitialisiationBille suite à une défaire, une perte de vie
 void Bille::ReinitialisationBille()
