@@ -26,8 +26,8 @@ int main()
 
 	
 
-	Bille bille(360,200,renderer);
 	Platform plateforme(400,LENGTH_SCREEN/2, renderer);
+	Bille bille(360,200,renderer,&plateforme);
 	SDL_Event event;
 	
 	bool gameRunning = true;
