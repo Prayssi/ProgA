@@ -18,7 +18,7 @@ public:
     SDL_Rect getRect();
     SDL_Rect getRectPos(int x, int y);
     SDL_Texture* getTexture();
-    void displayText(SDL_Renderer* renderer, SDL_Rect dst);
+    void displayTexture(SDL_Renderer* renderer, SDL_Rect dst);
     SDL_Point GetRectCenter();
 
 private:

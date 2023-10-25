@@ -83,7 +83,7 @@ SDL_Texture* Sprite::getTexture()//Renvoi la texture du Sprite
     return texture;
 }
 
-void Sprite::displayText(SDL_Renderer* renderer, SDL_Rect dst)
+void Sprite::displayTexture(SDL_Renderer* renderer, SDL_Rect dst)
 {
     SDL_Rect src = this->getRect();
     SDL_RenderCopy(renderer,this->getTexture(),&src,&dst);

@@ -1,0 +1,38 @@
+creer classr brique -> ghiles
+    nb de coup avant destruction
+    position
+    bonus drop
+        grossir balle
+        ajoute 1 balle
+        augmente vitesse
+
+créer fichier brique.cpp, brique.h
+determine toutes les fonctions à coder
+
+
+Fichier .cpp
+pour chaque fonction à coder 
+
+Constructure
+Brique::Briquz(): plateforme(plateforme)
+{
+
+
+}
+
+fonction
+void Brique::Nom_fonction()
+
+
+Fichier .h
+faire a peut pres comme bille.h
+
+Utilisation git
+git clone https://github.com/Prayssi/ProgA -> cloner le depot pour la premiere fois
+cd ProgA
+git checkout ghiles -> aller sur la branche ghiles
+git add . -> ajouter les modifications au dépot
+git commit -m "explication des modifications faites" -> faire une sauvegarde du dépot local
+git push origin ghiles -> faire une sauvegarde du dépot sur github
+
+git pull {nom de la branche} -> pour récupérer le code fait par les autres

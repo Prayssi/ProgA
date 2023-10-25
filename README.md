@@ -3,7 +3,7 @@
 blockbreaker-like fait par :<br>
 Tom LATOUCHE-HALLE<br>
 Thomas MARQUE<br>
-Ghilles MAZARI<br>
+Ghiles MAZARI<br>
 Dans le cadre du projet de programmation avancée en L2 Informatique à Nancy<br>
 
 ## Le lancer

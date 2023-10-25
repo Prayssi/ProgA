@@ -1,0 +1,37 @@
+terminer plateforme gaussienne
+regler bugs
+
+classe bille
+    gestion collision
+        tableau avec position des briques
+        rectangle contenant toutes les briques
+        si bille dans rectangle tester pour chaque brique si colission en x & si collision en y
+
+        si collision reduire vie de la brique & changer vecteur vitesse
+
+    pointeur vers liste brique dans jeu
+
+creer classr brique
+    nb de coup avant destruction
+    position
+    bonus drop
+        grossir balle
+        ajoute 1 balle
+        augmente vitesse
+
+    
+créer classe jeu
+    génération du terrain
+    gestion des vies
+    vecteur vitesse v = variable * vecteur trajectoir 
+
+
+créer menu
+    jouer 
+    option
+    parametre
+        nb vies
+        vitesse balle
+        activer/desactiver bonus
+
+

@@ -16,7 +16,7 @@
 
 int main()
 {
-	const int FPS = 30;
+	// const int FPS = 30;
 
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;
@@ -66,8 +66,8 @@ int main()
 			SDL_Rect dstBille = bille.sprite.getRectPos(bille.pos.getx(),bille.pos.gety());
 			SDL_Rect dstPlateforme = plateforme.sprite.getRectPos(plateforme.pos.getx(),plateforme.pos.gety());
 
-    		bille.sprite.displayText(renderer,dstBille);
-    		plateforme.sprite.displayText(renderer,dstPlateforme);
+    		bille.sprite.displayTexture(renderer,dstBille);
+    		plateforme.sprite.displayTexture(renderer,dstPlateforme);
 
     		//Et on actualise
     		SDL_RenderPresent(renderer);
