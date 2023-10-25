@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
-#include <cmath>
+#include <math.h>
 
 #include "bille.h"
 #include "sprite.h"
@@ -13,6 +13,7 @@
 #define HEIGHT_SCREEN 500
 #define LENGTH_SCREEN 720
 
+#define speed 3
 
 
 
@@ -91,14 +92,14 @@ void Bille::CollisionPlateforme()
 
 		if (distance <= this->circleradius * this->circleradius)//S'il y'a collision
 		{
-			double x = rx+this->plateforme->largeur/2 - cx;
-			double k = 0.1;
-			double Gauss = std::exp(-k * x);
-			printf("%f",Gauss);
+			double x = abs(rx+this->plateforme->largeur/2 - cx);
+			double k = 0.0001;
+			double Gauss = exp(-k * x*x);
+			printf("%f\t%f",Gauss,x);
 			fflush(stdout);
 			Vector2 nouvTraj;
 			nouvTraj.Set((1/Gauss),Gauss);
-	    	this->SetVitesse(vit.getx(),vit.gety()-1);
+	    	this->SetVitesse(vit.getx()*nouvTraj.getx(),vit.gety()*-1*nouvTraj.gety());
 		}
 
 }
@@ -115,6 +116,8 @@ void Bille::ReinitialisationBille()
 void Bille::SetVitesse(double vitX,double vitY)
 {
 	vit.Set(vitX,vitY);
+	vit.Normalized();
+	this->SetVitesse(speed);
 }
 
 //Multiplication des composants de la vitesse par un facteur
