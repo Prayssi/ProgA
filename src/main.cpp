@@ -73,7 +73,7 @@ int main()
     		SDL_RenderPresent(renderer);
 
     		//On impose une latence pour éviter d'être à 200000 FPS wtf
-			SDL_Delay(16);//16ms environ 60 FPS    		
+			SDL_Delay(17);//16ms environ 60 FPS    		
 
 		
 	}
