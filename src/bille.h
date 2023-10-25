@@ -9,6 +9,9 @@
 #include "vector2.h"
 #include "platform.h"
 
+#define hauteur_bille 17
+#define largeur_bille 17
+
 class Bille
 {
 public:
@@ -26,6 +29,9 @@ private:
 	void CollisionBord();
 	void CollisionPlateforme();
 	void ReinitialisationBille();
+
+	double circleradius = hauteur_bille/2;
+
 
 	
 };

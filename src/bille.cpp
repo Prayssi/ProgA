@@ -68,17 +68,41 @@ void Bille::CollisionBord()
 
 void Bille::CollisionPlateforme()
 {
-	int circleradius = hauteur_bille/2;
+	
+	
 
-	double dx = std::max(std::min(pos.getx()+ circleradius, this->plateforme->pos.getx() + this->plateforme->largeur), this->plateforme->pos.getx()) - pos.getx()+ circleradius;
-    double dy = std::max(std::min(pos.gety()+ circleradius, this->plateforme->pos.getx() + this->plateforme->pos.gety()), this->plateforme->pos.gety()) - pos.gety()+ circleradius;
-    double distance = dx * dx + dy * dy;
+	
+		double cx  = pos.getx() + this->circleradius;
+		double cy  = pos.gety() + this->circleradius;
+		double testX = cx;
+		double testY = cy;
 
-    if(distance <= circleradius*circleradius)
-    {
-  
-    	this->SetVitesse(vit.getx(),vit.gety()* -1);
-    }
+		double rx = this->plateforme->pos.getx();
+		double ry = this->plateforme->pos.gety();
+
+
+		if (cx < rx)         testX = rx;        // left edge
+		else if (cx > rx+this->plateforme->largeur) testX = rx+rx+this->plateforme->largeur;     // right edge
+
+		if (cy < ry)         testY = ry;        // top edge
+		else if (cy > ry+rx+this->plateforme->hauteur) testY = ry+this->plateforme->hauteur;     // bottom edge
+
+		double distX = cx-testX;
+		double distY = cy-testY;
+		double distance = (distX*distX) + (distY*distY) ;
+
+		if (distance <= this->circleradius * this->circleradius)
+		{
+			double x = rx+this->plateforme->largeur/2 - cx;
+			double k = 0.1;
+			double Gauss = std::exp(-k * x);
+			printf("%f",Gauss);
+			fflush(stdout);
+			Vector2 nouvTraj;
+			nouvTraj.Set((1/Gauss),Gauss);
+	    	this->SetVitesse(vit.getx()*nouvTraj.getx(),vit.gety()* -1 * nouvTraj.gety());
+		}
+
 }
 
 
