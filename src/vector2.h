@@ -117,7 +117,6 @@ struct Vector2
 		this->Set(xres,yres);
 	}
 
-
 };
 
 #endif

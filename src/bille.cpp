@@ -42,7 +42,8 @@ void Bille::Update()
 
 void Bille::CollisionBord()
 {
-	int circleradius = hauteur_bille/2;
+	int circleradius = hauteur_bille/2; //Rayon de la bille 
+
 	//test de collision avec le bord droite
 	if(circleradius+pos.getx()+sprite.GetRectCenter().x >= LENGTH_SCREEN)
 	{
@@ -69,29 +70,26 @@ void Bille::CollisionBord()
 void Bille::CollisionPlateforme()
 {
 	
-	
-
-	
-		double cx  = pos.getx() + this->circleradius;
-		double cy  = pos.gety() + this->circleradius;
+		double cx  = pos.getx() + this->circleradius;//centre x
+		double cy  = pos.gety() + this->circleradius;//centre y
 		double testX = cx;
 		double testY = cy;
 
-		double rx = this->plateforme->pos.getx();
-		double ry = this->plateforme->pos.gety();
+		double rx = this->plateforme->pos.getx();//x du coin supérieur gauche de la plateforme
+		double ry = this->plateforme->pos.gety();//y du coin supérieur gauche de la plateforme
 
 
-		if (cx < rx)         testX = rx;        // left edge
-		else if (cx > rx+this->plateforme->largeur) testX = rx+rx+this->plateforme->largeur;     // right edge
+		if (cx < rx)         testX = rx;        // bord gauche
+		else if (cx > rx+this->plateforme->largeur) testX = rx+rx+this->plateforme->largeur;     // bord droit
 
-		if (cy < ry)         testY = ry;        // top edge
-		else if (cy > ry+rx+this->plateforme->hauteur) testY = ry+this->plateforme->hauteur;     // bottom edge
+		if (cy < ry)         testY = ry;        // bord haut
+		else if (cy > ry+rx+this->plateforme->hauteur) testY = ry+this->plateforme->hauteur;     // bord bas
 
 		double distX = cx-testX;
 		double distY = cy-testY;
 		double distance = (distX*distX) + (distY*distY) ;
 
-		if (distance <= this->circleradius * this->circleradius)
+		if (distance <= this->circleradius * this->circleradius)//S'il y'a collision
 		{
 			double x = rx+this->plateforme->largeur/2 - cx;
 			double k = 0.1;
@@ -100,24 +98,26 @@ void Bille::CollisionPlateforme()
 			fflush(stdout);
 			Vector2 nouvTraj;
 			nouvTraj.Set((1/Gauss),Gauss);
-	    	this->SetVitesse(vit.getx()*nouvTraj.getx(),vit.gety()* -1 * nouvTraj.gety());
+	    	this->SetVitesse(vit.getx(),vit.gety()-1);
 		}
 
 }
 
 
-//ReinitialisiationBille suite à une défaire, une perte de vie
+//ReinitialisiationBille suite à une défaite, une perte de vie
 void Bille::ReinitialisationBille()
 {
 	pos.Set(LENGTH_SCREEN/2,HEIGHT_SCREEN/2);
 	SetVitesse(0,3);
 }
 
+//Set totale de la vitesse de la bille 
 void Bille::SetVitesse(double vitX,double vitY)
 {
 	vit.Set(vitX,vitY);
 }
 
+//Multiplication des composants de la vitesse par un facteur
 void Bille::SetVitesse(double mult)
 {
 	vit.time(mult);

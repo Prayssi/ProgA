@@ -51,14 +51,14 @@ int main()
                     fflush(stdout);
                 }
             }
-
+            //Dans cette boucle on met tout ce qui relatif aux événements
 		}
 			
 			bille.Update();
 			plateforme.Update();
 
 			//On efface tout...
-			SDL_SetRenderDrawColor(renderer,255,255,255,255);
+			SDL_SetRenderDrawColor(renderer,255,255,255,255);//Définit la couleur de fond
 			SDL_RenderClear(renderer);
 			
 
