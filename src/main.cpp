@@ -8,6 +8,7 @@
 #include "bille.h"
 #include "vector2.h"
 #include "platform.h"
+#include "gameManager.h"
 
 #define HEIGHT_SCREEN 500
 #define LENGTH_SCREEN 720
@@ -24,11 +25,9 @@ int main()
 	SDL_CreateWindowAndRenderer(LENGTH_SCREEN,HEIGHT_SCREEN,SDL_WINDOW_SHOWN,&window,&renderer); 
 	SDL_SetWindowTitle(window,"jRPG demo");
 
-	
-
-	Platform plateforme(400,LENGTH_SCREEN/2, renderer);
-	Bille bille(360,200,renderer,&plateforme);
 	SDL_Event event;
+
+	GameManager jeu(renderer);
 	
 	bool gameRunning = true;
 
@@ -42,32 +41,18 @@ int main()
 				gameRunning=false;
 			}
 
-
-			if (event.type == SDL_MOUSEBUTTONDOWN) {
-                if (event.button.button == SDL_BUTTON_LEFT) {
-                    // Si le bouton gauche de la souris est enfoncé, effectuez une action
-                    bille.SetVitesse(-1);
-                    printf("%f %f",bille.vit.getx(),bille.vit.gety());
-                    fflush(stdout);
-                }
-            }
             //Dans cette boucle on met tout ce qui relatif aux événements
 		}
 			
-			bille.Update();
-			plateforme.Update();
+			// bille.Update();
+			// plateforme.Update();
+
+			
 
 			//On efface tout...
 			SDL_SetRenderDrawColor(renderer,255,255,255,255);//Définit la couleur de fond
 			SDL_RenderClear(renderer);
-			
-
-			//...avant de tout réafficher
-			SDL_Rect dstBille = bille.sprite.getRectPos(bille.pos.getx(),bille.pos.gety());
-			SDL_Rect dstPlateforme = plateforme.sprite.getRectPos(plateforme.pos.getx(),plateforme.pos.gety());
-
-    		bille.sprite.displayText(renderer,dstBille);
-    		plateforme.sprite.displayText(renderer,dstPlateforme);
+			jeu.Update();
 
     		//Et on actualise
     		SDL_RenderPresent(renderer);
