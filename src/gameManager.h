@@ -16,11 +16,13 @@ public:
 	GameManager(SDL_Renderer* renderer);
 	~GameManager();
 	void Update();
-	// Début de la partie
+	void Start();
+	void endOfGame();
+	// Création de la map brique
 	// Ajouter une bille
 	// Supprimer une bille
-	// Augmenter le score
-	// Gestion vie
+	void variationScore(int var);
+	void variationVie(int var);
 
 
 	SDL_Renderer* renderer;
@@ -29,6 +31,7 @@ private:
 	Platform* plateforme = nullptr;
 	std::vector<Bille> billes;
 	int vie;
+	int score;
 
 
 };

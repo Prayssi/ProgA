@@ -8,6 +8,8 @@
 
 #include "gameManager.h"
 
+#define max(a,b)(a>=b?a:b)
+
 GameManager::GameManager(SDL_Renderer* renderer) : renderer(renderer)
 {
 	plateforme = new Platform(250,300,renderer);
@@ -17,6 +19,7 @@ GameManager::GameManager(SDL_Renderer* renderer) : renderer(renderer)
 GameManager::~GameManager()
 {
 	delete plateforme;
+	plateforme = nullptr;
 	billes.clear();
 }
 
@@ -32,4 +35,20 @@ void GameManager::Update()
     plateforme->Update();
     SDL_Rect dstPlateforme = plateforme->sprite.getRectPos(plateforme->pos.getx(),plateforme->pos.gety());
 	plateforme->sprite.displayText(renderer,dstPlateforme);
+}
+
+void GameManager::endOfGame()
+{
+
+}
+
+void GameManager::variationVie(int var)
+{
+	this->vie = max(0,this->vie + var);
+	if(vie <= 0) endOfGame();
+}
+
+void GameManager::variationScore(int var)
+{
+	this->score = this->score + var;
 }

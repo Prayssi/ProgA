@@ -9,6 +9,7 @@
 #include "vector2.h"
 #include "platform.h"
 #include "gameManager.h"
+#include "menu.h"
 
 #define HEIGHT_SCREEN 500
 #define LENGTH_SCREEN 720
@@ -27,32 +28,46 @@ int main()
 
 	SDL_Event event;
 
-	GameManager jeu(renderer);
+	// GameManager jeu(renderer);
+	Menu menuScreen(renderer);
 	
 	bool gameRunning = true;
 
 	while(gameRunning)
 	{
+		int mouseX, mouseY;
+        SDL_GetMouseState(&mouseX, &mouseY);
+
 		
-		while(SDL_PollEvent(&event))
+        while(SDL_PollEvent(&event))
 		{
 			if(event.type == SDL_QUIT)
 			{
 				gameRunning=false;
 			}
 
-            //Dans cette boucle on met tout ce qui relatif aux événements
-		}
-			
-			// bille.Update();
-			// plateforme.Update();
+
+			if (event.type == SDL_MOUSEMOTION) {
+                    if (  mouseY > 200
+                  && mouseY <= 200+90
+                  && mouseX > 163
+                  && mouseX <= 163+394 
+              		)
+                    {
+              menuScreen.boutonJouerUpdate(1);
+          }else{ 
+          		menuScreen.boutonJouerUpdate(0);
+                }
+            }
+            }
 
 			
 
 			//On efface tout...
 			SDL_SetRenderDrawColor(renderer,255,255,255,255);//Définit la couleur de fond
 			SDL_RenderClear(renderer);
-			jeu.Update();
+			// jeu.Update();
+			menuScreen.Update();
 
     		//Et on actualise
     		SDL_RenderPresent(renderer);
