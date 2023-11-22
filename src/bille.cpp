@@ -125,3 +125,11 @@ void Bille::SetVitesse(double mult)
 {
 	vit.time(mult);
 }
+
+int Bille::getX() {
+    return this->pos.getx();
+}
+
+int Bille::getY() {
+    return this->pos.getx();
+}

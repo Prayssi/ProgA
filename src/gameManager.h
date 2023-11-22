@@ -32,6 +32,7 @@ private:
 	std::vector<Bille> billes;
 	int vie;
 	int score;
+	bool jeuEnCours = false;
 
 
 };

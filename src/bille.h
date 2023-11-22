@@ -20,7 +20,9 @@ public:
 	void Update();
 	void SetVitesse(double vitX, double vitY);//On modifie la vitesse et la direction nous même
 	void SetVitesse(double mult);//On modifie la vitesse et la direction en multipliant les deux composants par un facteur
-	
+	int getX();
+	int getY();
+
 	Sprite sprite;
 	Vector2 pos;
 	Vector2 vit;
